@@ -30,4 +30,17 @@ public class CubeActor : SceneActor
             .SetLoops(2, LoopType.Yoyo)
             .SetEase(Ease.OutQuad);
     }
+
+    public override void Act(params object[] args)
+    {
+        return;
+    }
+
+    public override void Interact(SceneActor otherActor)
+    {
+        if(otherActor is EatingBallActor)
+        {
+            DestroyActor();
+        }
+    }
 }

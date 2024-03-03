@@ -8,7 +8,8 @@ public abstract class SceneActor : MonoBehaviour
 {
     protected Rigidbody Rigidbody { get; private set; }
     protected MeshRenderer MeshRenderer { get; private set; }
-    public event Action<SceneActor, SceneActor> OnActorCollide;
+    public event Action<SceneActor> OnActorDestroy;
+
     public bool IsActive { get; set; }
 
 
@@ -33,10 +34,13 @@ public abstract class SceneActor : MonoBehaviour
         transform.position = position + MeshRenderer.bounds.extents.y * Vector3.up;
     }
 
-    public void TriggerOnActorCollide(SceneActor actor_A, SceneActor actor_B)
+    public void DestroyActor()
     {
-        OnActorCollide?.Invoke(actor_A, actor_B);
+        OnActorDestroy?.Invoke(this);
+        Destroy(this.gameObject);   
     }
 
     protected abstract void Animate();
+    public abstract void Act(params object[] args);
+    public abstract void Interact(SceneActor otherActor);
 }
