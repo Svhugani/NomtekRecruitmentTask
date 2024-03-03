@@ -5,17 +5,28 @@ using UnityEngine;
 
 public class UIManager : MonoBehaviour, IUIManager
 {
+    [SerializeField] private ItemSelectionPanel itemSelectionPanel;
     public event Action<GameObject> OnItemSelected;
 
-    public void AnimateSelectionPanel(bool animateIn)
+    private void Awake()
     {
-        throw new NotImplementedException();
+        itemSelectionPanel.OnItemSelected += TriggerActorSelected;
     }
 
     public void SetupPanels()
     {
-        throw new NotImplementedException();
+        itemSelectionPanel.PopulateGridContent();
     }
 
+    public void AnimateSelectionPanel(bool animateIn)
+    {
+        if (animateIn) itemSelectionPanel.AnimateIn();
+        else itemSelectionPanel.AnimateOut();
+    }
+
+    private void TriggerActorSelected(GameObject item)
+    {
+        OnItemSelected?.Invoke(item);
+    }
 
 }
