@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -37,6 +38,7 @@ public abstract class SceneActor : MonoBehaviour
     public void DestroyActor()
     {
         OnActorDestroy?.Invoke(this);
+        DOTween.Kill(transform);
         Destroy(this.gameObject);   
     }
 
