@@ -12,6 +12,8 @@ public class ActorsManager : MonoBehaviour, IActorsManager
     private List<CubeActor> _cubeActors = new();
     private List<SceneActor> _sceneActors = new();
 
+    private readonly Vector3 _previewInitPosition = new Vector3(100, 0, 0);
+
     private void Update()
     {
         foreach (SceneActor actor in _sceneActors)
@@ -42,7 +44,7 @@ public class ActorsManager : MonoBehaviour, IActorsManager
 
     public void SpawnActorPreview(SceneActor actor)
     {
-        _previewActor = Instantiate(actor);
+        _previewActor = Instantiate(actor, _previewInitPosition, Quaternion.identity);
         _previewActor.Initialize();
         _previewActor.SetToPreviewMode();
         _previewActor.IsActive = false;

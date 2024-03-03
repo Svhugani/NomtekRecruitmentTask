@@ -218,7 +218,7 @@ MonoBehaviour:
   mainRing: {fileID: 3524512628888711836}
   secondaryRing: {fileID: 1386336234392401261}
   tertiaryRing: {fileID: 542407341299726213}
-  movementSpeed: 2
+  movementSpeed: 4
   rotationSpeed: 45
 --- !u!1 &7146553550139897288
 GameObject:

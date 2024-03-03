@@ -13,7 +13,7 @@ public class EatingBallActor : SceneActor
 
     protected override void Animate()
     {
-        transform.DOScale(Vector3.one * 1.1f, 0.15f)
+        transform.DOScale(Vector3.one * 1.1f, 0.10f)
             .SetLoops(2, LoopType.Yoyo)
             .SetEase(Ease.OutQuad);
     }
@@ -80,9 +80,9 @@ public class EatingBallActor : SceneActor
 
                 // Rings manual animation part (visual effect only)
                 float amount = Time.deltaTime * rotationSpeed;
-                mainRing.Rotate(0, 0, amount * 1.5f);
-                secondaryRing.Rotate(0, 0, amount * 1.25f);
-                tertiaryRing.Rotate(0, 0, amount * 1.0f);
+                mainRing.Rotate(0, 0, amount * 2.5f);
+                secondaryRing.Rotate(0, 0, amount * 2.25f);
+                tertiaryRing.Rotate(0, 0, amount * 2.0f);
             }
         }
 
