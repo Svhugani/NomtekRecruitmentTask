@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5d05465823fc564cae2aa94af392e89, type: 3}
+  m_Name: Red_Cube_D
+  m_EditorClassIdentifier: 
+  <Text>k__BackingField: Red Cube D
+  <Preview>k__BackingField: {fileID: 2800000, guid: d79e4ceafd4dc2748b5ec8a14e3cb9e3,
+    type: 3}
+  <Content>k__BackingField: {fileID: 6224282940328967687, guid: e66440b9045e7c04a84de57d82747b6c,
+    type: 3}

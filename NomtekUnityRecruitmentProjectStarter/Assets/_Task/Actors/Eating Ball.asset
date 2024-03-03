@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5d05465823fc564cae2aa94af392e89, type: 3}
+  m_Name: Eating Ball
+  m_EditorClassIdentifier: 
+  <Text>k__BackingField: Eating Ball
+  <Preview>k__BackingField: {fileID: 2800000, guid: 6928a0ccc1efbce489f22cc1c503e7f9,
+    type: 3}
+  <Content>k__BackingField: {fileID: 3219711950206225144, guid: 9a0588d7600d5784c972b9f9476baf7b,
+    type: 3}

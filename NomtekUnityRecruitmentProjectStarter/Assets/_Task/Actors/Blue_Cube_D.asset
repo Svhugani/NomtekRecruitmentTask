@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5d05465823fc564cae2aa94af392e89, type: 3}
+  m_Name: Blue_Cube_D
+  m_EditorClassIdentifier: 
+  <Text>k__BackingField: Blue Cube D
+  <Preview>k__BackingField: {fileID: 2800000, guid: 878089ec0fe30324b878412bf33778b3,
+    type: 3}
+  <Content>k__BackingField: {fileID: 6266714243402196009, guid: c58d7c28666ad2d438f48765072d0b27,
+    type: 3}

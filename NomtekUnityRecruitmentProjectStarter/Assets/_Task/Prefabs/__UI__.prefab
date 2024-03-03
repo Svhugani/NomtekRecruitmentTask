@@ -31,7 +31,7 @@ Transform:
   - {fileID: 4002157722787097509}
   - {fileID: 4002157723916169657}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4002157722787097508
 GameObject:
@@ -226,6 +226,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8201100095183890716, guid: 09f5bc6582fcb9f4384fd7b33c38dd63,
         type: 3}
+    - target: {fileID: 947855187413317867, guid: cf1b7d9c279fe2f4e9f8e913d2e19670,
+        type: 3}
+      propertyPath: itemsAssetPack
+      value: 
+      objectReference: {fileID: 11400000, guid: 9d0fecdfedd4c534b88f81e6e2516980,
+        type: 2}
     - target: {fileID: 3296091087447579805, guid: cf1b7d9c279fe2f4e9f8e913d2e19670,
         type: 3}
       propertyPath: m_Pivot.x
@@ -360,6 +366,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164992686670977957, guid: cf1b7d9c279fe2f4e9f8e913d2e19670,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.000009059906
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
