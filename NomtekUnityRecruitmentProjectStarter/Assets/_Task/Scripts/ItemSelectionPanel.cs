@@ -27,14 +27,14 @@ public class ItemSelectionPanel : UIPanel
     {
         Body.DOAnchorPos(
             InitAnchor - new Vector2(1.1f * Body.sizeDelta.x, 0),
-            FadeInDuration).SetEase(Ease.OutQuad);
+            FadeInDuration).SetEase(Ease.OutQuad).OnComplete(() => IsOn = false);
     }
 
     public override void AnimateIn()
     {
         Body.DOAnchorPos(
             InitAnchor,
-            FadeInDuration).SetEase(Ease.OutQuad);
+            FadeInDuration).SetEase(Ease.OutQuad).OnComplete(() => IsOn = true); ;
     }
 
     public void PopulateGridContent()
@@ -59,7 +59,7 @@ public class ItemSelectionPanel : UIPanel
         OnItemSelected?.Invoke(itemsAssetPack.Items[itemIndex].Content);
     }
 
-    private void SearchByName(string key)
+    public void SearchByName(string key)
     {
         if (string.IsNullOrEmpty(key))
         {
@@ -79,4 +79,15 @@ public class ItemSelectionPanel : UIPanel
             card.gameObject.SetActive(contains);
         }
     }
+
+    public List<UIItemCard> GetItemCards()
+    {
+        return _itemCards;
+    }
+
+    public void SetItemsPack(ItemsAssetPack newPack)
+    {
+        itemsAssetPack = newPack;
+    }
+
 }

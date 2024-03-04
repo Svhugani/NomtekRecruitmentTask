@@ -32,4 +32,11 @@ public class UIItemCard : MonoBehaviour
     {
         return textContent.text;
     }
+
+    public Texture2D GetTexture()
+    {
+        return (Texture2D)imageContent.texture;
+    }
+
+
 }
