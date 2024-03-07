@@ -42,52 +42,46 @@ public class EatingBallActor : SceneActor
         }
     }
 
-    public override void Act(params object[] args)
+    public override void Act()
     {
         if (!IsActive) return;
 
-        if (args.Length > 0 && args[0] is List<CubeActor> cubeTargets)
+        CubeActor closestCube = null;
+        float minDist = float.MaxValue;
+
+        foreach (CubeActor cubeActor in EnvironmentData.CubeActors)
         {
-            CubeActor closestCube = null;
-            float minDist = float.MaxValue;
+            if (!cubeActor.IsActive) continue;
 
-            foreach (CubeActor cubeActor in cubeTargets)
+            float dist = Vector3.Distance(transform.position, cubeActor.transform.position);
+            if (dist < minDist)
             {
-                if(!cubeActor.IsActive) continue;
-
-                float dist = Vector3.Distance(transform.position, cubeActor.transform.position);
-                if (dist < minDist)
-                {
-                    minDist = dist;
-                    closestCube = cubeActor;
-                }
-            }
-
-            if (closestCube != null)
-            {
-                Vector3 dir = closestCube.transform.position - transform.position;
-                dir.Normalize();
-
-                transform.position = Vector3.Lerp(
-                    transform.position,
-                    transform.position + dir,
-                    movementSpeed * Time.deltaTime);
-
-                transform.forward = Vector3.Lerp(
-                    transform.forward,
-                    dir,
-                    rotationSpeed * Time.deltaTime);
-
-                // Rings manual animation part (visual effect only)
-                float amount = Time.deltaTime * rotationSpeed;
-                mainRing.Rotate(0, 0, amount * 2.5f);
-                secondaryRing.Rotate(0, 0, amount * 2.25f);
-                tertiaryRing.Rotate(0, 0, amount * 2.0f);
+                minDist = dist;
+                closestCube = cubeActor;
             }
         }
 
+        if (closestCube != null)
+        {
+            Vector3 dir = closestCube.transform.position - transform.position;
+            dir.Normalize();
 
+            transform.position = Vector3.Lerp(
+                transform.position,
+                transform.position + dir,
+                movementSpeed * Time.deltaTime);
 
+            transform.forward = Vector3.Lerp(
+                transform.forward,
+                dir,
+                rotationSpeed * Time.deltaTime);
+
+            // Rings manual animation part (visual effect only)
+            float amount = Time.deltaTime * rotationSpeed;
+            mainRing.Rotate(0, 0, amount * 2.5f);
+            secondaryRing.Rotate(0, 0, amount * 2.25f);
+            tertiaryRing.Rotate(0, 0, amount * 2.0f);
+        }
     }
 
     public override void Interact(SceneActor otherActor)

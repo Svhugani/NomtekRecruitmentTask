@@ -31,7 +31,7 @@ public class CubeActor : SceneActor
             .SetEase(Ease.OutQuad);
     }
 
-    public override void Act(params object[] args)
+    public override void Act()
     {
         return;
     }
