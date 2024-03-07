@@ -1,6 +1,7 @@
 using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ActorsManager : MonoBehaviour, IActorsManager
@@ -9,18 +10,14 @@ public class ActorsManager : MonoBehaviour, IActorsManager
     [SerializeField] private LayerMask placementLayerMask;
 
     private SceneActor _previewActor;
-    private List<CubeActor> _cubeActors = new();
+    private List<SceneActor> _resourceActors = new();
     private List<SceneActor> _sceneActors = new();
 
     private readonly Vector3 _previewInitPosition = new Vector3(100, 0, 0);
 
     private void Update()
     {
-        foreach (SceneActor actor in _sceneActors)
-        {
-            if (actor is EatingBallActor) actor.Act(_cubeActors);
-            else actor.Act();
-        }
+        foreach (SceneActor actor in _sceneActors) actor.Act();
     }
 
     public void CancelActorPreview()
@@ -51,8 +48,19 @@ public class ActorsManager : MonoBehaviour, IActorsManager
         _previewActor.OnActorDestroy += ClearReferences;
         _sceneActors.Add(_previewActor);
 
-        CubeActor cubeActor = _previewActor as CubeActor;
-        if (cubeActor is CubeActor) _cubeActors.Add(cubeActor);
+        if(_previewActor.ActorType == SceneActorType.Resource)
+        {
+            _resourceActors.Add(_previewActor);
+        }
+
+        else
+        { 
+            EatingBallActor eatingBallActor = _previewActor as EatingBallActor;
+            if (eatingBallActor != null) 
+            {
+                eatingBallActor.ResourceTargets = _resourceActors;
+            }
+        }
     }
 
     public void UpdatePreviewPosition(Vector2 screenPosition)
@@ -70,9 +78,12 @@ public class ActorsManager : MonoBehaviour, IActorsManager
 
     private void ClearReferences(SceneActor actor)
     {
-        CubeActor cubeActor = actor as CubeActor;
-        if (cubeActor is CubeActor) _cubeActors.Remove(cubeActor);
         _sceneActors.Remove(actor);
+
+        if (actor.ActorType == SceneActorType.Resource) 
+        {
+            _resourceActors.Remove(actor);
+        }
     }
 
 }

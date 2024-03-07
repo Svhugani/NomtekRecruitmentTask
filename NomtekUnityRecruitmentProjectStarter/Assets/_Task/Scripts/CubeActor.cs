@@ -5,7 +5,11 @@ using UnityEngine;
 
 public class CubeActor : SceneActor
 {
-
+    public override void Initialize()
+    {
+        base.Initialize();
+        ActorType = SceneActorType.Resource;
+    }
     public override void SetToPreviewMode()
     {
         base.SetToPreviewMode();
@@ -31,7 +35,7 @@ public class CubeActor : SceneActor
             .SetEase(Ease.OutQuad);
     }
 
-    public override void Act(params object[] args)
+    public override void Act()
     {
         return;
     }

@@ -7,6 +7,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public abstract class SceneActor : MonoBehaviour
 {
+    public SceneActorType ActorType { get; protected set; } = SceneActorType.Undefined;
     protected Rigidbody Rigidbody { get; private set; }
     protected MeshRenderer MeshRenderer { get; private set; }
     public event Action<SceneActor> OnActorDestroy;
@@ -43,6 +44,6 @@ public abstract class SceneActor : MonoBehaviour
     }
 
     protected abstract void Animate();
-    public abstract void Act(params object[] args);
+    public abstract void Act();
     public abstract void Interact(SceneActor otherActor);
 }

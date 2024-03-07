@@ -11,6 +11,14 @@ public class EatingBallActor : SceneActor
     [SerializeField, Header("Settings")] private float movementSpeed = 2f;
     [SerializeField] private float rotationSpeed = 45f;
 
+    public List<SceneActor> ResourceTargets { get; set; }
+
+    public override void Initialize()
+    {
+        base.Initialize();
+        ActorType = SceneActorType.Eater;
+    }
+
     protected override void Animate()
     {
         transform.DOScale(Vector3.one * 1.1f, 0.10f)
@@ -34,28 +42,29 @@ public class EatingBallActor : SceneActor
     {
         if (!IsActive) return;
 
-        CubeActor cubeActor = collision.collider.GetComponent<CubeActor>();
-        if (cubeActor != null && cubeActor.IsActive)
+        SceneActor actor = collision.collider.GetComponent<SceneActor>();
+        if (actor != null && actor.IsActive)
         {
-            cubeActor.Interact(this);
-            Interact(cubeActor);
+            actor.Interact(this);
+            Interact(actor);
         }
     }
 
-    public override void Act(params object[] args)
+    public override void Act()
     {
         if (!IsActive) return;
 
-        if (args.Length > 0 && args[0] is List<CubeActor> cubeTargets)
+        if (ResourceTargets != null && ResourceTargets.Count > 0)
         {
             CubeActor closestCube = null;
             float minDist = float.MaxValue;
 
-            foreach (CubeActor cubeActor in cubeTargets)
+            foreach (CubeActor cubeActor in ResourceTargets)
             {
                 if(!cubeActor.IsActive) continue;
 
                 float dist = Vector3.Distance(transform.position, cubeActor.transform.position);
+
                 if (dist < minDist)
                 {
                     minDist = dist;
@@ -84,9 +93,8 @@ public class EatingBallActor : SceneActor
                 secondaryRing.Rotate(0, 0, amount * 2.25f);
                 tertiaryRing.Rotate(0, 0, amount * 2.0f);
             }
+
         }
-
-
 
     }
 
