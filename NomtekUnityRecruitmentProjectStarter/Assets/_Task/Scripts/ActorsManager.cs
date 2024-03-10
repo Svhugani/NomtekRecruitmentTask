@@ -2,25 +2,31 @@ using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class ActorsManager : MonoBehaviour, IActorsManager
 {
     [SerializeField] private GameObject ground;
     [SerializeField] private LayerMask placementLayerMask;
 
+    private EnvironmentData _environmentData;
     private SceneActor _previewActor;
-    private List<CubeActor> _cubeActors = new();
-    private List<SceneActor> _sceneActors = new();
-
     private readonly Vector3 _previewInitPosition = new Vector3(100, 0, 0);
+
+    private SceneActor.Factory _sceneActorFactory;
+
+    [Inject]
+    public void Construct(EnvironmentData environmentData, SceneActor.Factory sceneActorFactory)
+    {
+        _environmentData = environmentData;
+        _sceneActorFactory = sceneActorFactory;
+        _environmentData.OnActorRegistered += delegate { Debug.Log($"Actors: {_environmentData.SceneActors.Count}"); };
+        _environmentData.OnActorUnregistered += delegate { Debug.Log($"Actors: {_environmentData.SceneActors.Count}"); };
+    }
 
     private void Update()
     {
-        foreach (SceneActor actor in _sceneActors)
-        {
-            if (actor is EatingBallActor) actor.Act(_cubeActors);
-            else actor.Act();
-        }
+        foreach (SceneActor actor in _environmentData.SceneActors) actor.Act();
     }
 
     public void CancelActorPreview()
@@ -38,21 +44,18 @@ public class ActorsManager : MonoBehaviour, IActorsManager
         {
             _previewActor.SetToNormalMode();
             _previewActor.IsActive = true;
+            _environmentData.RegisterSceneActor(_previewActor);
+
             _previewActor = null;
         }
     }
 
     public void SpawnActorPreview(SceneActor actor)
     {
-        _previewActor = Instantiate(actor, _previewInitPosition, Quaternion.identity);
+        _previewActor = _sceneActorFactory.Create(actor.gameObject);
         _previewActor.Initialize();
         _previewActor.SetToPreviewMode();
         _previewActor.IsActive = false;
-        _previewActor.OnActorDestroy += ClearReferences;
-        _sceneActors.Add(_previewActor);
-
-        CubeActor cubeActor = _previewActor as CubeActor;
-        if (cubeActor is CubeActor) _cubeActors.Add(cubeActor);
     }
 
     public void UpdatePreviewPosition(Vector2 screenPosition)
@@ -68,11 +71,5 @@ public class ActorsManager : MonoBehaviour, IActorsManager
         }
     }
 
-    private void ClearReferences(SceneActor actor)
-    {
-        CubeActor cubeActor = actor as CubeActor;
-        if (cubeActor is CubeActor) _cubeActors.Remove(cubeActor);
-        _sceneActors.Remove(actor);
-    }
 
 }
