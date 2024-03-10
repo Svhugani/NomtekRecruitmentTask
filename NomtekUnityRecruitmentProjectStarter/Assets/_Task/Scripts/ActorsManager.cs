@@ -53,6 +53,7 @@ public class ActorsManager : MonoBehaviour, IActorsManager
     public void SpawnActorPreview(SceneActor actor)
     {
         _previewActor = _sceneActorFactory.Create(actor.gameObject);
+        _previewActor.transform.position = _previewInitPosition;
         _previewActor.Initialize();
         _previewActor.SetToPreviewMode();
         _previewActor.IsActive = false;
