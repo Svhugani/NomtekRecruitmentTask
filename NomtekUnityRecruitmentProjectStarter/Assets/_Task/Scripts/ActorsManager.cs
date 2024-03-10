@@ -13,10 +13,13 @@ public class ActorsManager : MonoBehaviour, IActorsManager
     private SceneActor _previewActor;
     private readonly Vector3 _previewInitPosition = new Vector3(100, 0, 0);
 
+    private SceneActor.Factory _sceneActorFactory;
+
     [Inject]
-    public void Construct(EnvironmentData environmentData)
+    public void Construct(EnvironmentData environmentData, SceneActor.Factory sceneActorFactory)
     {
         _environmentData = environmentData;
+        _sceneActorFactory = sceneActorFactory;
         _environmentData.OnActorRegistered += delegate { Debug.Log($"Actors: {_environmentData.SceneActors.Count}"); };
         _environmentData.OnActorUnregistered += delegate { Debug.Log($"Actors: {_environmentData.SceneActors.Count}"); };
     }
@@ -49,8 +52,7 @@ public class ActorsManager : MonoBehaviour, IActorsManager
 
     public void SpawnActorPreview(SceneActor actor)
     {
-        _previewActor = Instantiate(actor, _previewInitPosition, Quaternion.identity);
-        _previewActor.Construct(_environmentData);
+        _previewActor = _sceneActorFactory.Create(actor.gameObject);
         _previewActor.Initialize();
         _previewActor.SetToPreviewMode();
         _previewActor.IsActive = false;

@@ -15,6 +15,7 @@ public abstract class SceneActor : MonoBehaviour
     protected EnvironmentData EnvironmentData { get; set; }
     public bool IsActive { get; set; }
 
+    [Inject]
     public void Construct(EnvironmentData environmentData)
     {
         this.EnvironmentData = environmentData;
@@ -53,4 +54,12 @@ public abstract class SceneActor : MonoBehaviour
     public abstract void Act();
     public abstract void Interact(SceneActor otherActor);
 
+    public class Factory: PlaceholderFactory<GameObject, SceneActor> 
+    {
+
+    }
+
 }
+
+
+

@@ -1,7 +1,6 @@
 using System;
 using UnityEngine;
 using Zenject;
-using static SceneActor;
 
 public class MainSceneInstallers : MonoInstaller<MainSceneInstallers>
 {
@@ -19,6 +18,9 @@ public class MainSceneInstallers : MonoInstaller<MainSceneInstallers>
         Container.Bind<IActorsManager>().FromInstance(actorsManager).AsSingle();
         Container.Bind<IUIManager>().FromInstance(uiManager).AsSingle();
         Container.BindInstance(environmentData).AsSingle();
+
+        //Container.Bind<SceneActor.Factory>().AsSingle();
+        Container.BindFactory<GameObject, SceneActor, SceneActor.Factory>().FromFactory<SceneActorFactory>(); 
 
     }
 
