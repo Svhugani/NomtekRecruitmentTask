@@ -8,6 +8,7 @@ public abstract class UIPanel : MonoBehaviour
     [field: SerializeField] public float FadeOutDuration { get; private set; } = .5f;
     protected RectTransform Body { get; private set; }
     protected Vector2 InitAnchor { get; private set; }
+    public bool IsOn { get; set; }
 
 
     protected virtual void Awake()

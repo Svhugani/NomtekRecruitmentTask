@@ -662,9 +662,10 @@ MonoBehaviour:
   <FadeInDuration>k__BackingField: 0.5
   <FadeOutDuration>k__BackingField: 0.5
   itemsAssetPack: {fileID: 0}
-  gridContent: {fileID: 0}
-  searchField: {fileID: 0}
-  itemCardPrefab: {fileID: 0}
+  gridContent: {fileID: 8164992686670977957}
+  searchField: {fileID: 6583517547158248904}
+  itemCardPrefab: {fileID: 8201100095183890716, guid: 09f5bc6582fcb9f4384fd7b33c38dd63,
+    type: 3}
 --- !u!1 &4313756103242310089
 GameObject:
   m_ObjectHideFlags: 0
